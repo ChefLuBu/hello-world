@@ -2,12 +2,8 @@ import React from "react";
 import {
   View,
   Text,
-  TextInput,
-  StyleSheet,
-  Button,
-} from "react-native";
+  } from "react-native";
 
-const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
 
 export default class Chat extends React.Component {
   constructor(props) {
