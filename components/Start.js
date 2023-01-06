@@ -27,9 +27,11 @@ export default class Start extends React.Component {
 
   render() {
     return (
+      //keep track of the mutliple wrappers and views
+      //if you see errors, check to ensure everything is in order
       <View style={styles.container}>
         <ImageBackground source={Image} style={styles.image}>
-          <Text style={styles.title}>Fuck Twitter!</Text>
+          <Text style={styles.title}>Chat App!</Text>
           <View style={styles.startWrapper}>
             <View style={styles.inputWrapper}>
               <TextInput
@@ -43,6 +45,9 @@ export default class Start extends React.Component {
               <Text style={styles.colorText}>Choose Background Color:</Text>
               <View style={styles.colors}>
                 <TouchableOpacity
+                //A wrapper for making views respond properly to touches. 
+                //On press down, the opacity of the wrapped view is decreased,
+                //dimming it. Replaces the BUTTON element but uses same styling
                   style={[
                     styles.color,
                     { backgroundColor: backgroundColors.black },
@@ -77,6 +82,7 @@ export default class Start extends React.Component {
                   onPress={() =>
                     this.setState({ color: backgroundColors.green })
                   }
+                  //four touchable opacity components, one for each color
                 />
               </View>
             </View>
@@ -88,9 +94,6 @@ export default class Start extends React.Component {
                   color: this.state.color,
                 })
               }
-              accessible={true}
-              accessibilityLabel="Start chatting"
-              accessibilityHint="Enter the chat room, where you can send messages to your contacts."
             >
               <Text style={styles.buttonText}>Start Chatting</Text>
             </TouchableOpacity>
