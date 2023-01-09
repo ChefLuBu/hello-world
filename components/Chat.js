@@ -6,14 +6,12 @@ export default class Chat extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundColor: this.props.route.params.color,
+      messages: [],
     };
   }
 
   componentDidMount() {
     let name = this.props.route.params.name;
-    let color = this.props.route.params.color;
-    this.props.navigation.setOptions({ title: name, backgroundColor: color });
     this.setState({
       messages: [
         {
@@ -66,18 +64,22 @@ export default class Chat extends React.Component {
   }
 
   render() {
+    let color = this.props.route.params.color;
     let name = this.props.route.params.name;
     this.props.navigation.setOptions({ title: name });
     return (
-      <View style={styles.androidFix}>
-        <GiftedChat
-          renderBubble={this.renderBubble.bind(this)}
-          messages={this.state.messages}
-          onSend={(messages) => this.onSend(messages)}
-          user={{
-            _id: 1,
-          }}
-        />
+      <View style={[{flex: 1}, {backgroundColor: color}]}>
+      <GiftedChat
+        renderBubble={this.renderBubble.bind(this)}
+        messages={this.state.messages}
+        onSend={messages => this.onSend(messages)}
+        user={{
+        _id: 1
+        }}
+        accessible={true}
+        accessibilityLabel='Chat input field'
+        accessibilityHint='Here you can enter the message. After entering the message, you can press send on the right.'
+      />
         {Platform.OS === "android" ? (
           <KeyboardAvoidingView behavior="height" />
         ) : null}
@@ -85,8 +87,8 @@ export default class Chat extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  androidFix: {
-    flex: 1,
-  },
-})
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+// })
