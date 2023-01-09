@@ -45,6 +45,9 @@ export default class Start extends React.Component {
               <Text style={styles.colorText}>Choose Background Color:</Text>
               <View style={styles.colors}>
                 <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="Black button"
+                accessibilityHint="Sets background color to black"
                 //A wrapper for making views respond properly to touches. 
                 //On press down, the opacity of the wrapped view is decreased,
                 //dimming it. Replaces the BUTTON element but uses same styling
@@ -57,6 +60,9 @@ export default class Start extends React.Component {
                   }
                 />
                 <TouchableOpacity
+                 accessible={true}
+                 accessibilityLabel="Purple button"
+                 accessibilityHint="Sets background color to purple"
                   style={[
                     styles.color,
                     { backgroundColor: backgroundColors.purple },
@@ -66,6 +72,9 @@ export default class Start extends React.Component {
                   }
                 />
                 <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="Grey button"
+                accessibilityHint="Sets background color to grey"
                   style={[
                     styles.color,
                     { backgroundColor: backgroundColors.grey },
@@ -75,6 +84,9 @@ export default class Start extends React.Component {
                   }
                 />
                 <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="Green button"
+                accessibilityHint="Sets background color to Greeb"
                   style={[
                     styles.color,
                     { backgroundColor: backgroundColors.green },
@@ -98,6 +110,7 @@ export default class Start extends React.Component {
               <Text style={styles.buttonText}>Start Chatting</Text>
             </TouchableOpacity>
           </View>
+        
         </ImageBackground>
       </View>
     );
