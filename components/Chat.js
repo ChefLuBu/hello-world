@@ -116,29 +116,8 @@ export default class Chat extends React.Component {
     this.authUnsubscribe();
   }
 
-  onSend(messages = []) {
-    this.setState(
-      (previousState) => ({
-        messages: GiftedChat.append(previousState.messages, messages),
-      }),
-      () => {
-        this.saveMessages();
-        // this.addMessages();
-      }
-    );
-  }
 
-  addMessage = () => {
-    const message = this.state.messages[0];
-    this.referenceChatMessages.add({
-      _id: message._id,
-      createdAt: message.createdAt,
-      text: message.text,
-      user: message.user,
-      uid: this.state.uid,
-    });
-  };
-
+ 
   renderBubble(props) {
     return (
       <Bubble
@@ -186,6 +165,33 @@ export default class Chat extends React.Component {
       messages,
     });
   };
+  
+  addMessage = (message) => {
+    this.referenceChatMessages.add({
+      _id: message._id,
+      createdAt: message.createdAt,
+      text: message.text,
+      user: message.user,
+      uid: this.state.uid,
+    });
+  };
+
+
+  onSend(messages = []) {
+    this.setState(
+      (previousState) => ({
+        messages: GiftedChat.append(previousState.messages, messages),
+      }),
+      () => {
+        const message =messages[0];
+        this.saveMessages();
+        this.addMessages(message);
+      }
+    );
+  }
+
+
+
 
   render() {
     let color = this.props.route.params.color;
