@@ -1,49 +1,36 @@
 import PropTypes from "prop-types";
-//import react
 import React from "react";
-//import necessary components from react-native
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-//import permissions and imagepicker
 // import * as Permissions from "expo-permissions";
-// import * as ImagePicker from "expo-image-picker";
-// import * as Location from "expo-location";
-import firebase from 'firebase';
+import * as ImagePicker from "expo-image-picker";
+import * as Location from "expo-location";
 // import firestore from 'firebase';
+// import ActionSheet from 'react-native-actionsheet'
 
-// const firebase = require("firebase");
-// require("firebase/firestore");
+
+const firebase = require("firebase");
+require("firebase/firestore");
 
 export default class CustomActions extends React.Component {
-  /**
-   * Let the user pick an image from the device's image library
-   * @function imagePicker
-   * @async
-   */
+
   imagePicker = async () => {
-    // expo permission
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    // try {
-    //   if (status === "granted") {
-    //     // pick image
-    //     const result = await ImagePicker.launchImageLibraryAsync({
-    //       mediaTypes: ImagePicker.MediaTypeOptions.Images, // only images are allowed
-    //     }).catch((error) => console.log(error));
-    //     // canceled process
-    //     if (!result.cancelled) {
-    //       const imageUrl = await this.uploadImageFetch(result.uri);
-    //       this.props.onSend({ image: imageUrl });
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+    try {
+      if (status === "granted") {
+        const result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Images, // only images are allowed
+        }).catch((error) => console.log(error));
+        if (!result.cancelled) {
+          const imageUrl = await this.uploadImageFetch(result.uri);
+          this.props.onSend({ image: imageUrl });
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  /**
-   * Let the user take a photo with device's camera
-   * @function takePhoto
-   * @async
-   */
+
   takePhoto = async () => {
     const { status } = await Permissions.askAsync(
       Permissions.CAMERA,
@@ -65,11 +52,7 @@ export default class CustomActions extends React.Component {
     }
   };
 
-  /**
-   * get the location of the user by using GPS
-   * @function getLocation
-   * @async
-   */
+
   getLocation = async () => {
     try {
       const { status } = await Permissions.askAsync(Permissions.LOCATION);
@@ -93,11 +76,7 @@ export default class CustomActions extends React.Component {
     }
   };
 
-  /**
-   * Upload images to firebase
-   * @function uploadImageFetch
-   * @async
-   */
+
   uploadImageFetch = async (uri) => {
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -125,10 +104,8 @@ export default class CustomActions extends React.Component {
     return await snapshot.ref.getDownloadURL();
   };
 
-  /**
-   * function that handles communication features
-   * @function onActionPress
-   */
+ 
+
   onActionPress = () => {
     const options = [
       "Choose From Library",
@@ -158,7 +135,6 @@ export default class CustomActions extends React.Component {
     );
   };
 
-  //render function
   render() {
     return (
       <TouchableOpacity

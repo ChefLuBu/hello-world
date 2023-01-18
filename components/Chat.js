@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from '@react-native-community/netinfo';
 import {LogBox} from 'react-native';
 import CustomActions from './CustomActions';
-
+import { Constants, MapView, Location, Permissions } from 'expo';
 
 
 const firebase = require("firebase");
@@ -198,6 +198,8 @@ export default class Chat extends React.Component {
     );
   }
 
+
+  renderCustomActions = (props) => <CustomActions {...props} />;
 
 
 
