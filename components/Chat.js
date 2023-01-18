@@ -3,7 +3,8 @@ import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import { View, Platform, KeyboardAvoidingView, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from '@react-native-community/netinfo';
-import {LogBox} from 'react-native'
+import {LogBox} from 'react-native';
+import CustomActions from './CustomActions';
 
 
 
@@ -206,6 +207,7 @@ export default class Chat extends React.Component {
       <View style={[{ flex: 1 }, { backgroundColor: color }]}>
         <GiftedChat
           renderBubble={this.renderBubble.bind(this)}
+          renderActions={this.renderCustomActions}
           renderInputToolbar={props => this.renderInputToolbar(props)}
           messages={this.state.messages}
           onSend={(messages) => this.onSend(messages)}

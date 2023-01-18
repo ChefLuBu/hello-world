@@ -2,6 +2,7 @@ import * as React from "react";
 import Start from './components/Start';
 import Chat from './components/Chat';
 import 'react-native-gesture-handler';
+import CustomActions from './components/CustomActions';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -15,6 +16,9 @@ export default class App extends React.Component{
     this.state= { text: "" }
   }
 
+  renderCustomActions = (props) => {
+    return <CustomActions {...props} />
+  };
 
   render(){
     return (
