@@ -21,7 +21,7 @@ export default function CustomActions(props) {
         const result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images, // only images are allowed
         }).catch((error) => console.log(error));
-        if (!result.cancelled) {
+        if (!result.canceled) {
           const imageUrl = await uploadImageFetch(result.uri);
           props.onSend({ image: imageUrl });
         }
@@ -39,7 +39,7 @@ export default function CustomActions(props) {
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
         }).catch((error) => console.log(error));
 
-        if (!result.cancelled) {
+        if (!result.canceled) {
           const imageUrl = await uploadImageFetch(result.uri);
           props.onSend({ image: imageUrl });
         }
@@ -88,7 +88,7 @@ export default function CustomActions(props) {
       xhr.send(null);
     });
 
-    const imageNfromameBefore = uri.split("/");
+    const imageNameBefore = uri.split("/");
     const imageName = imageNameBefore[imageNameBefore.length - 1];
 
     const ref = firebase.storage().ref().child(`images/${imageName}`);

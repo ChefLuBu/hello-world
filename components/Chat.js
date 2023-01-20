@@ -1,11 +1,11 @@
-import React from "react";
-import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
+import * as React from "react";
+import { GiftedChat, InputToolbar, Bubble } from "react-native-gifted-chat";
 import { View, Platform, KeyboardAvoidingView} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
-import { LogBox } from "react-native";
 import CustomActions from "./CustomActions";
-import  MapView  from "expo";
+import  MapView  from "react-native-maps";
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 
 const firebase = require("firebase");
@@ -28,7 +28,6 @@ export default class Chat extends React.Component {
       isConnected: false,
     };
 
-    LogBox.ignoreAllLogs(true);
 
     if (!firebase.apps.length) {
       firebase.initializeApp({
@@ -182,7 +181,7 @@ export default class Chat extends React.Component {
     );
   }
 
-  renderBubble(props) {
+ renderBubble(props) {
     return (
       <Bubble
         {...props}
@@ -229,13 +228,15 @@ export default class Chat extends React.Component {
   render() {
     let color = this.props.route.params.color;
     return (
+      <ActionSheetProvider>
       <View style={[{ flex: 1 }, { backgroundColor: color }]}>
         <GiftedChat
+          messages={this.state.messages}
+          isConnected={this.state.isConnected}
           renderBubble={this.renderBubble.bind(this)}
           renderInputToolbar={(props) => this.renderInputToolbar(props)}
           renderActions={this.renderCustomActions}
           renderCustomView={this.renderCustomView}
-          messages={this.state.messages}
           onSend={(messages) => this.onSend(messages)}
           user={{
             _id: this.state.uid,
@@ -249,6 +250,7 @@ export default class Chat extends React.Component {
           <KeyboardAvoidingView behavior="height" />
         ) : null}
       </View>
+      </ActionSheetProvider>
     );
   }
 }
