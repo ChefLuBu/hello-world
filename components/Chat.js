@@ -74,18 +74,6 @@ export default class Chat extends React.Component {
 
   componentDidMount() {
     let name = this.props.route.params.name;
-    this.getMessages();
-    //this is getting messages from local storage, which is stored about in async GetMessages
-    this.setState({
-      messages: [
-        {
-          _id: 2,
-          text: `${name} has entered the chat`,
-          createdAt: new Date(),
-          system: true,
-        },
-      ],
-    });
     this.props.navigation.setOptions({ title: name });
 
     this.referenceChatMessagesUser = firebase
@@ -145,10 +133,7 @@ export default class Chat extends React.Component {
           avatar: data.user.avatar || "",
         },
         image: data.image || null,
-        location: {
-          latitude: "",
-          longitude: "",
-        },
+        location:data.location|| null,
       });
     });
     this.setState({
@@ -164,6 +149,7 @@ export default class Chat extends React.Component {
       text: message.text || "",
       user: message.user || "",
       uid: this.state.uid || undefined,
+      image: message.image || null,
       location: message.location || null,
     });
   };
