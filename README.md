@@ -17,6 +17,8 @@ Upon loading the app, users can set up their name & color preference before they
 
 ## Technologies Used
 React-Native
-Firestore
+
+firestore/firebase
+
 GiftedChat
 
