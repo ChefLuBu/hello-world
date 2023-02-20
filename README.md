@@ -15,8 +15,8 @@ This is a chat app building using the Gifted Chat library and React-native, alon
 Upon loading the app, users can set up their name & color preference before they're taken to the chat window, with which they can talk to other people actively accessing the app.
 
 
-#Technologies Used
-*React-Native
-*Firestore
-*GiftedChat
+## Technologies Used
+React-Native
+Firestore
+GiftedChat
 
